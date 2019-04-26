@@ -5669,6 +5669,7 @@ paths:
               - amount
               - bin
               - coupon
+              - currency
               - date
               - email
               - last4
