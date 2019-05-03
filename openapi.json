@@ -13347,6 +13347,8 @@
           "Gpaysafe",
           "iDebit",
           "iDEAL",
+          "INOVAPAY-pin",
+          "INOVAPAY-wallet",
           "InstaDebit",
           "instant-bank-transfer",
           "Interac-online",
