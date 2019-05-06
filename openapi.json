@@ -14431,7 +14431,8 @@
           },
           "username": {
             "description": "PayPal username.",
-            "type": "string"
+            "type": "string",
+            "readOnly": true
           },
           "status": {
             "description": "PayPal Account status",

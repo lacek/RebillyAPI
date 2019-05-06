@@ -10462,6 +10462,7 @@ components:
         username:
           description: PayPal username.
           type: string
+          readOnly: true
         status:
           description: PayPal Account status
           type: string
