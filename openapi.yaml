@@ -8341,17 +8341,6 @@ components:
           minItems: 1
           items:
             $ref: '#/components/schemas/CustomerLink'
-    password-less:
-      required:
-        - customerId
-      allOf:
-        - $ref: '#/components/schemas/AuthenticationToken'
-        - properties:
-            customerId:
-              description: The token's customer ID
-              allOf:
-                - $ref: '#/components/schemas/ResourceId'
-        - $ref: '#/components/schemas/AuthenticationTokenMetadata'
     password:
       required:
         - username
@@ -8370,6 +8359,17 @@ components:
             customerId:
               description: The token's customer ID
               readOnly: true
+              allOf:
+                - $ref: '#/components/schemas/ResourceId'
+        - $ref: '#/components/schemas/AuthenticationTokenMetadata'
+    passwordless:
+      required:
+        - customerId
+      allOf:
+        - $ref: '#/components/schemas/AuthenticationToken'
+        - properties:
+            customerId:
+              description: The token's customer ID
               allOf:
                 - $ref: '#/components/schemas/ResourceId'
         - $ref: '#/components/schemas/AuthenticationTokenMetadata'
