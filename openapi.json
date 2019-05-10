@@ -11051,7 +11051,7 @@
           "paymentToken": {
             "type": "string",
             "writeOnly": true,
-            "description": "A write-only payment token; if supplied, it will be converted into a\npayment instrument and be set as the `defaultPaymentInstrument`. The\nvalue of this property will override the `defaultPaymentInstrument`\nin the case that both are supplied.\n"
+            "description": "A write-only payment token; if supplied, it will be converted into a\npayment instrument and be set as the `defaultPaymentInstrument`. The\nvalue of this property will override the `defaultPaymentInstrument`\nin the case that both are supplied. The token may only be used once\nbefore it is expired.\n"
           },
           "defaultPaymentInstrument": {
             "$ref": "#/components/schemas/PaymentInstrument"
