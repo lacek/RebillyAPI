@@ -11209,17 +11209,27 @@
       "CustomerJWT": {
         "type": "object",
         "properties": {
+          "id": {
+            "description": "The session identifier string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResourceId"
+              }
+            ],
+            "readOnly": true
+          },
+          "type": {
+            "description": "Session type",
+            "type": "string",
+            "readOnly": true,
+            "enum": [
+              "customer"
+            ]
+          },
           "token": {
             "description": "The session's token used for authentication",
             "type": "string",
             "readOnly": true
-          },
-          "invalidate": {
-            "description": "Whether to invalidate token after exchange or not",
-            "type": "boolean",
-            "default": true,
-            "example": true,
-            "writeOnly": true
           },
           "customerId": {
             "description": "The customer's ID",
@@ -11230,11 +11240,26 @@
               }
             ]
           },
+          "invalidate": {
+            "description": "Whether to invalidate token after exchange or not",
+            "type": "boolean",
+            "default": true,
+            "example": true,
+            "writeOnly": true
+          },
           "createdTime": {
             "description": "Session created time",
             "type": "string",
             "format": "date-time",
             "readOnly": true
+          },
+          "updatedTime": {
+            "description": "Session updated time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
           },
           "expiredTime": {
             "description": "Session expired time. Defaults to one hour",
