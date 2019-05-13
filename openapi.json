@@ -7416,7 +7416,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "The collection items filter requires a special format.\nUse \",\" for multiple allowed values.  Use \";\" for multiple fields.\nUse one or more of the listed filter fields. i.e. `is:customer email:bob@test.com`\n",
+            "description": "The collection items filter requires a special format.\nUse \",\" for multiple allowed values.  Use \";\" for multiple fields.\nUse one or more of the listed filter fields. i.e. `is:customer email:bob@test.com`.\nThe `date` value can be surrounded with quotes. Examples:\n`>2019-01-01`, `last month`, `yesterday`, `<=2019-04-30`.\n",
             "schema": {
               "type": "string",
               "enum": [
