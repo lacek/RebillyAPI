@@ -11396,8 +11396,7 @@
           "expiredTime": {
             "description": "Session expired time. Defaults to one hour",
             "type": "string",
-            "format": "date-time",
-            "readOnly": true
+            "format": "date-time"
           },
           "_links": {
             "type": "array",
