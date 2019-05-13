@@ -10,6 +10,12 @@ properties:
     default: true
     example: true
     writeOnly: true
+  oneTimePassword:
+    description: The one time password sent via an email. Should contain digits only.
+    type: string
+    pattern: "^[0-9]{6}$"
+    example: "123456"
+    writeOnly: true
   customerId:
     description: The customer's ID
     readOnly: true
