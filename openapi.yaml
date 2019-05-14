@@ -9570,6 +9570,18 @@ components:
             - initialInvoice
       required:
         - rel
+    InvoicesLink:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Link'
+      properties:
+        rel:
+          description: The link type
+          type: string
+          enum:
+            - invoices
+      required:
+        - rel
     LeadSourceLink:
       type: object
       allOf:
@@ -12943,6 +12955,7 @@ components:
               - $ref: '#/components/schemas/CancelUrlLink'
               - $ref: '#/components/schemas/RefundUrlLink'
               - $ref: '#/components/schemas/DisputeLink'
+              - $ref: '#/components/schemas/InvoicesLink'
     TransactionRequest:
       type: object
       required:

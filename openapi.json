@@ -13024,6 +13024,26 @@
           "rel"
         ]
       },
+      "InvoicesLink": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Link"
+          }
+        ],
+        "properties": {
+          "rel": {
+            "description": "The link type",
+            "type": "string",
+            "enum": [
+              "invoices"
+            ]
+          }
+        },
+        "required": [
+          "rel"
+        ]
+      },
       "LeadSourceLink": {
         "type": "object",
         "allOf": [
@@ -17923,6 +17943,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/DisputeLink"
+                },
+                {
+                  "$ref": "#/components/schemas/InvoicesLink"
                 }
               ]
             }
