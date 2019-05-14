@@ -931,63 +931,6 @@
           }
         ]
       },
-      "post": {
-        "tags": [
-          "Customer Authentication"
-        ],
-        "summary": "Exchange",
-        "description": "Exchange Authentication Token for JWT\n\nIt will also invalidate an Authentication Token by default (so it can only be exchanged once).\n",
-        "security": [
-          {
-            "SecretApiKey": []
-          },
-          {
-            "JWT": []
-          },
-          {
-            "PublishableApiKey": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CustomerJWT"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Authentication Token exhanged for JWT",
-            "headers": {
-              "Rate-Limit-Limit": {
-                "$ref": "#/components/headers/Rate-Limit-Limit"
-              },
-              "Rate-Limit-Remaining": {
-                "$ref": "#/components/headers/Rate-Limit-Remaining"
-              },
-              "Rate-Limit-Reset": {
-                "$ref": "#/components/headers/Rate-Limit-Reset"
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CustomerJWT"
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/AccessForbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          }
-        }
-      },
       "delete": {
         "tags": [
           "Customer Authentication"
@@ -1033,6 +976,76 @@
             "source": "$client->authenticationTokens()->logout('token');\n"
           }
         ]
+      }
+    },
+    "/authentication-tokens/{token}/exchange": {
+      "parameters": [
+        {
+          "name": "token",
+          "in": "path",
+          "description": "The token identifier string",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "tags": [
+          "Customer Authentication"
+        ],
+        "summary": "Exchange",
+        "description": "Exchange Authentication Token for JWT\n\nIt will also invalidate an Authentication Token by default (so it can only be exchanged once).\n",
+        "security": [
+          {
+            "SecretApiKey": []
+          },
+          {
+            "JWT": []
+          },
+          {
+            "PublishableApiKey": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerJWT"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Authentication Token exchanged for JWT",
+            "headers": {
+              "Rate-Limit-Limit": {
+                "$ref": "#/components/headers/Rate-Limit-Limit"
+              },
+              "Rate-Limit-Remaining": {
+                "$ref": "#/components/headers/Rate-Limit-Remaining"
+              },
+              "Rate-Limit-Reset": {
+                "$ref": "#/components/headers/Rate-Limit-Reset"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerJWT"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/AccessForbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
       }
     },
     "/bank-accounts": {
@@ -7416,7 +7429,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "The collection items filter requires a special format.\nUse \",\" for multiple allowed values.  Use \";\" for multiple fields.\nUse one or more of the listed filter fields. i.e. `is:customer email:bob@test.com`\n",
+            "description": "The collection items filter requires a special format.\nUse \",\" for multiple allowed values.  Use \";\" for multiple fields.\nUse one or more of the listed filter fields. i.e. `is:customer email:bob@test.com`.\nThe `date` value can be surrounded with quotes. Examples:\n`>2019-01-01`, `last month`, `yesterday`, `<=2019-04-30`.\n",
             "schema": {
               "type": "string",
               "enum": [
@@ -11217,10 +11230,36 @@
       "CustomerJWT": {
         "type": "object",
         "properties": {
+          "id": {
+            "description": "The session identifier string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResourceId"
+              }
+            ],
+            "readOnly": true
+          },
+          "type": {
+            "description": "Session type",
+            "type": "string",
+            "readOnly": true,
+            "enum": [
+              "customer"
+            ]
+          },
           "token": {
             "description": "The session's token used for authentication",
             "type": "string",
             "readOnly": true
+          },
+          "customerId": {
+            "description": "The customer's ID",
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResourceId"
+              }
+            ]
           },
           "invalidate": {
             "description": "Whether to invalidate token after exchange or not",
@@ -11236,20 +11275,19 @@
             "example": "123456",
             "writeOnly": true
           },
-          "customerId": {
-            "description": "The customer's ID",
-            "readOnly": true,
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ResourceId"
-              }
-            ]
-          },
           "createdTime": {
             "description": "Session created time",
             "type": "string",
             "format": "date-time",
             "readOnly": true
+          },
+          "updatedTime": {
+            "description": "Session updated time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
           },
           "expiredTime": {
             "description": "Session expired time. Defaults to one hour",
