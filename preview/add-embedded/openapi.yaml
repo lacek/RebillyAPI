@@ -7426,25 +7426,6 @@ paths:
           $ref: '#/components/responses/Conflict'
 components:
   schemas:
-    AmountRestrictions:
-      type: object
-      required:
-        - currency
-        - min
-      properties:
-        currency:
-          description: Currency (three letter ISO 4217 code)
-          type: string
-        min:
-          description: The minimum amount allowed
-          type: number
-          format: double
-          minimum: 0
-        max:
-          description: The maximum amount allowed
-          type: number
-          format: double
-          minimum: 0
     Attachment:
       type: object
       required:
@@ -9792,18 +9773,6 @@ components:
           type: string
           enum:
             - notes
-      required:
-        - rel
-    OnBoardingUrlLink:
-      type: object
-      allOf:
-        - $ref: '#/components/schemas/Link'
-      properties:
-        rel:
-          description: The link type
-          type: string
-          enum:
-            - onBoardingUrl
       required:
         - rel
     OrganizationLink:
