@@ -13149,8 +13149,6 @@ components:
               - $ref: '#/components/schemas/GatewayAccountEmbed'
               - $ref: '#/components/schemas/CustomerEmbed'
               - $ref: '#/components/schemas/LeadSourceEmbed'
-              - $ref: '#/components/schemas/PaymentCardEmbed'
-              - $ref: '#/components/schemas/BankAccountEmbed'
               - $ref: '#/components/schemas/InvoicesEmbed'
     TransactionRequest:
       type: object
