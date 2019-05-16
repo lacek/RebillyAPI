@@ -7504,6 +7504,14 @@ components:
               - $ref: '#/components/schemas/SelfLink'
               - $ref: '#/components/schemas/FileLink'
               - $ref: '#/components/schemas/AttachmentResourceLink'
+        _embedded:
+          type: array
+          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          readOnly: true
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/FileEmbed'
     BankAccount:
       type: object
       required:
@@ -7584,6 +7592,14 @@ components:
             anyOf:
               - $ref: '#/components/schemas/SelfLink'
               - $ref: '#/components/schemas/CustomerLink'
+        _embedded:
+          type: array
+          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          readOnly: true
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/CustomerEmbed'
     BankAccountCreatePlain:
       type: object
       required:
@@ -8229,141 +8245,6 @@ components:
             anyOf:
               - $ref: '#/components/schemas/SelfLink'
               - $ref: '#/components/schemas/CustomerLink'
-    Condition:
-      type: object
-      discriminator:
-        propertyName: op
-      properties:
-        op:
-          type: string
-          description: The condition operation
-          enum:
-            - and
-            - or
-            - not
-            - between
-            - equals
-            - in
-            - gt
-            - gte
-            - lt
-            - lte
-      required:
-        - op
-    and:
-      type: object
-      description: Logical AND
-      allOf:
-        - $ref: '#/components/schemas/Condition'
-        - $ref: '#/components/schemas/logical'
-    between:
-      type: object
-      description: Between condition
-      allOf:
-        - $ref: '#/components/schemas/Condition'
-        - type: object
-          properties:
-            path:
-              type: string
-            min:
-              type: string
-            max:
-              type: string
-          required:
-            - path
-            - min
-            - max
-    compare:
-      type: object
-      properties:
-        path:
-          type: string
-        value:
-          type: string
-      required:
-        - path
-        - value
-    equals:
-      type: object
-      description: Equals condition
-      allOf:
-        - $ref: '#/components/schemas/Condition'
-        - $ref: '#/components/schemas/compare'
-    gt:
-      type: object
-      description: Greater than condition
-      allOf:
-        - $ref: '#/components/schemas/Condition'
-        - $ref: '#/components/schemas/compare'
-    gte:
-      type: object
-      description: Greater than or equals condition
-      allOf:
-        - $ref: '#/components/schemas/Condition'
-        - $ref: '#/components/schemas/compare'
-    in:
-      type: object
-      description: In condition
-      allOf:
-        - $ref: '#/components/schemas/Condition'
-        - type: object
-          properties:
-            path:
-              type: string
-            values:
-              type: array
-              items:
-                type: string
-          required:
-            - path
-            - values
-    logical-not:
-      type: object
-      properties:
-        condition:
-          $ref: '#/components/schemas/Condition'
-      required:
-        - condition
-      example:
-        operation: not
-        condition:
-          operation: equals
-          path: /name
-          value: John Dou
-    logical:
-      type: object
-      properties:
-        conditions:
-          type: array
-          minItems: 2
-          items:
-            $ref: '#/components/schemas/Condition'
-      required:
-        - conditions
-    lt:
-      type: object
-      description: Less than condition
-      allOf:
-        - $ref: '#/components/schemas/Condition'
-        - $ref: '#/components/schemas/compare'
-    lte:
-      type: object
-      description: Less than or equals condition
-      allOf:
-        - $ref: '#/components/schemas/Condition'
-        - $ref: '#/components/schemas/compare'
-    not:
-      type: object
-      description: Logical NOT
-      allOf:
-        - $ref: '#/components/schemas/Condition'
-        - $ref: '#/components/schemas/logical-not'
-    or:
-      type: object
-      description: Logical OR
-      allOf:
-        - $ref: '#/components/schemas/Condition'
-        - $ref: '#/components/schemas/logical'
     Customer:
       type: object
       properties:
@@ -8908,6 +8789,13 @@ components:
           items:
             anyOf:
               - $ref: '#/components/schemas/TransactionEmbed'
+    AuthTransactionEmbed:
+      type: object
+      description: Auth Transaction object
+      readOnly: true
+      properties:
+        authTransaction:
+          $ref: '#/components/schemas/Transaction'
     BankAccountEmbed:
       type: object
       description: Bank Account object
@@ -8922,13 +8810,20 @@ components:
       properties:
         customer:
           $ref: '#/components/schemas/Customer'
+    FileEmbed:
+      type: object
+      description: File object
+      readOnly: true
+      properties:
+        file:
+          $ref: '#/components/schemas/File'
     GatewayAccountEmbed:
       type: object
       description: Gateway Account object
       readOnly: true
       properties:
         gatewayAccount:
-          $ref: '#/components/schemas/GatewayAccount'
+          $ref: 'https://rebilly.github.io/RebillyUserAPI/openapi.json#/components/schemas/GatewayAccount'
     InitialInvoiceEmbed:
       type: object
       description: Initial Invoice object
@@ -8952,6 +8847,13 @@ components:
       properties:
         leadSource:
           $ref: '#/components/schemas/LeadSource'
+    OrganizationEmbed:
+      type: object
+      description: Organization object
+      readOnly: true
+      properties:
+        organization:
+          $ref: 'https://rebilly.github.io/RebillyUserAPI/openapi.json#/components/schemas/Organization'
     ParentTransactionEmbed:
       type: object
       description: Retried Transaction object
@@ -8966,6 +8868,20 @@ components:
       properties:
         paymentCard:
           $ref: '#/components/schemas/PaymentCard'
+    PlanEmbed:
+      type: object
+      description: Plan object
+      readOnly: true
+      properties:
+        plan:
+          $ref: '#/components/schemas/Plan'
+    ProductEmbed:
+      type: object
+      description: Product object
+      readOnly: true
+      properties:
+        product:
+          $ref: '#/components/schemas/Product'
     RecentInvoiceEmbed:
       type: object
       description: Recent Invoice object
@@ -8980,6 +8896,13 @@ components:
       properties:
         retriedTransaction:
           $ref: '#/components/schemas/Transaction'
+    SubscriptionEmbed:
+      type: object
+      description: Subscription object
+      readOnly: true
+      properties:
+        subscription:
+          $ref: '#/components/schemas/Subscription'
     TransactionEmbed:
       type: object
       description: Transaction object
@@ -9156,131 +9079,6 @@ components:
           example:
             - test
             - tags
-    GatewayAccount:
-      type: object
-      required:
-        - gatewayName
-        - acquirerName
-        - merchantCategoryCode
-        - websites
-        - acceptedCurrencies
-        - organizationId
-      discriminator:
-        propertyName: gatewayName
-      properties:
-        id:
-          description: The gateway identifier string
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-        status:
-          description: The gateway account's status
-          readOnly: true
-          type: string
-          enum:
-            - active
-            - inactive
-            - pending
-        gatewayName:
-          $ref: 'https://rebilly.github.io/api-standards/schema/json-schema-draft-04/payment-gateways/gateway-name.json'
-        acquirerName:
-          $ref: 'https://rebilly.github.io/api-standards/schema/json-schema-draft-04/payment-gateways/acquirer-name.json'
-        merchantCategoryCode:
-          description: The gateway account's merchant category code
-          type: integer
-          minimum: 742
-          maximum: 9950
-        dccMarkup:
-          description: Dynamic currency conversion markup in basis points
-          type: integer
-          minimum: 1
-          maximum: 10000
-        dccForceCurrency:
-          type: string
-          description: |
-            Force dynamic currency conversion to the specified currency on each sale.
-            Leave it empty to disable force DCC.
-        descriptor:
-          description: The gateway account's descriptor
-          type: string
-        cityField:
-          description: The gateway account's city field (also known as line 2 descriptor)
-          type: string
-        organizationId:
-          description: Organization ID
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-        websites:
-          description: Websites IDs
-          type: array
-          items:
-            description: Website ID
-            allOf:
-              - $ref: '#/components/schemas/ResourceId'
-        excludedDccQuoteCurrencies:
-          description: Excluded Dynamic Currency Conversion Quote Currencies
-          type: array
-          items:
-            type: string
-        monthlyLimit:
-          description: Monthly Limit
-          type: number
-          format: double
-          minimum: 0
-        approvalWindowTtl:
-          description: The time window (in seconds) allotted for approving a suspended transaction before it is automatically canceled
-          type: integer
-          default: 3600
-          minimum: 300
-          maximum: 1296000
-        threeDSecure:
-          description: 'True, if Gateway Account allows 3DSecure'
-          type: boolean
-        dynamicDescriptor:
-          description: 'True, if Gateway Account allows dynamic descriptor'
-          type: boolean
-        acceptedCurrencies:
-          description: Accepted currencies (array of the currency three letter code)
-          type: array
-          items:
-            type: string
-        method:
-          $ref: '#/components/schemas/Method'
-        paymentCardSchemes:
-          description: Accepted payment card brands
-          type: array
-          items:
-            $ref: 'https://rebilly.github.io/api-standards/schema/json-schema-draft-04/payment-instruments/payment-card-brands.json'
-        isDown:
-          description: True if gateway is currently in downtime period.
-          type: boolean
-          readOnly: true
-        amountRestrictions:
-          description: Set restrictions on allowed amounts per currency
-          type: array
-          items:
-            $ref: '#/components/schemas/AmountRestrictions'
-        restriction:
-          description: Set restriction conditions on transaction
-          allOf:
-            - $ref: '#/components/schemas/Condition'
-        createdTime:
-          description: Gateway Account created time
-          allOf:
-            - $ref: '#/components/schemas/ServerTimestamp'
-        updatedTime:
-          description: Gateway Account updated time
-          allOf:
-            - $ref: '#/components/schemas/ServerTimestamp'
-        _links:
-          type: array
-          description: The links related to resource
-          readOnly: true
-          minItems: 1
-          items:
-            anyOf:
-              - $ref: '#/components/schemas/SelfLink'
-              - $ref: '#/components/schemas/OnBoardingUrlLink'
     InvalidError:
       description: Invalid data was sent
       allOf:
@@ -9513,6 +9311,17 @@ components:
               - $ref: '#/components/schemas/WebsiteLink'
               - $ref: '#/components/schemas/OrganizationLink'
               - $ref: '#/components/schemas/LeadSourceLink'
+        _embedded:
+          type: array
+          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          readOnly: true
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/CustomerEmbed'
+              - $ref: '#/components/schemas/WebsiteEmbed'
+              - $ref: '#/components/schemas/OrganizationEmbed'
+              - $ref: '#/components/schemas/LeadSourceEmbed'
     InvoiceIssue:
       type: object
       properties:
@@ -9593,6 +9402,16 @@ components:
               - $ref: '#/components/schemas/SelfLink'
               - $ref: '#/components/schemas/SubscriptionLink'
               - $ref: '#/components/schemas/ProductLink'
+        _embedded:
+          type: array
+          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          readOnly: true
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/SubscriptionEmbed'
+              - $ref: '#/components/schemas/ProductEmbed'
+              - $ref: '#/components/schemas/PlanEmbed'
     InvoiceTax:
       type: object
       readOnly: true
@@ -10322,6 +10141,16 @@ components:
               - $ref: '#/components/schemas/TransactionLink'
               - $ref: '#/components/schemas/ApprovalUrlLink'
               - $ref: '#/components/schemas/LeadSourceLink'
+        _embedded:
+          type: array
+          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          readOnly: true
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/WebsiteEmbed'
+              - $ref: '#/components/schemas/CustomerEmbed'
+              - $ref: '#/components/schemas/TransactionEmbed'
     PaymentCard:
       type: object
       required:
@@ -10367,7 +10196,7 @@ components:
           readOnly: true
         status:
           description: |
-            Payment Card status.  When a card is `active` it means it has been used at least once for an approved transaction.  
+            Payment Card status.  When a card is `active` it means it has been used at least once for an approved transaction.
             To remove a card from being in use, set it as `deactivated` (see the deactivation endpoint).
           type: string
           readOnly: true
@@ -10415,6 +10244,15 @@ components:
               - $ref: '#/components/schemas/CustomerLink'
               - $ref: '#/components/schemas/AuthTransactionLink'
               - $ref: '#/components/schemas/ApprovalUrlLink'
+        _embedded:
+          type: array
+          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          readOnly: true
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/AuthTransactionEmbed'
+              - $ref: '#/components/schemas/CustomerEmbed'
     PaymentCardCreatePlain:
       type: object
       required:
