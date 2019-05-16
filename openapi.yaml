@@ -7485,6 +7485,14 @@ components:
               - $ref: '#/components/schemas/SelfLink'
               - $ref: '#/components/schemas/FileLink'
               - $ref: '#/components/schemas/AttachmentResourceLink'
+        _embedded:
+          type: array
+          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          readOnly: true
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/FileEmbed'
     BankAccount:
       type: object
       required:
@@ -7565,6 +7573,14 @@ components:
             anyOf:
               - $ref: '#/components/schemas/SelfLink'
               - $ref: '#/components/schemas/CustomerLink'
+        _embedded:
+          type: array
+          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          readOnly: true
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/CustomerEmbed'
     BankAccountCreatePlain:
       type: object
       required:
@@ -7750,6 +7766,14 @@ components:
             anyOf:
               - $ref: '#/components/schemas/SelfLink'
               - $ref: '#/components/schemas/CustomerLink'
+        _embedded:
+          type: array
+          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          readOnly: true
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/CustomerEmbed'
     ContactEmails:
       description: The list of emails
       type: array
@@ -8266,6 +8290,14 @@ components:
               - $ref: '#/components/schemas/NotesLink'
               - $ref: '#/components/schemas/DefaultPaymentInstrumentLink'
               - $ref: '#/components/schemas/LeadSourceLink'
+        _embedded:
+          type: array
+          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          readOnly: true
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/LeadSourceEmbed'
     AuthenticationOptions:
       type: object
       properties:
@@ -8730,6 +8762,28 @@ components:
             anyOf:
               - $ref: '#/components/schemas/SelfLink'
               - $ref: '#/components/schemas/TransactionLink'
+        _embedded:
+          type: array
+          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          readOnly: true
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/TransactionEmbed'
+    AuthTransactionEmbed:
+      type: object
+      description: Auth Transaction object
+      readOnly: true
+      properties:
+        authTransaction:
+          $ref: '#/components/schemas/Transaction'
+    BankAccountEmbed:
+      type: object
+      description: Bank Account object
+      readOnly: true
+      properties:
+        bankAccount:
+          $ref: '#/components/schemas/BankAccount'
     CustomerEmbed:
       type: object
       description: Customer object
@@ -8737,6 +8791,20 @@ components:
       properties:
         customer:
           $ref: '#/components/schemas/Customer'
+    FileEmbed:
+      type: object
+      description: File object
+      readOnly: true
+      properties:
+        file:
+          $ref: '#/components/schemas/File'
+    GatewayAccountEmbed:
+      type: object
+      description: Gateway Account object
+      readOnly: true
+      properties:
+        gatewayAccount:
+          $ref: 'https://rebilly.github.io/RebillyUserAPI/openapi.json#/components/schemas/GatewayAccount'
     InitialInvoiceEmbed:
       type: object
       description: Initial Invoice object
@@ -8744,6 +8812,57 @@ components:
       properties:
         initialInvoice:
           $ref: '#/components/schemas/Invoice'
+    InvoicesEmbed:
+      type: object
+      description: Invoices collection
+      readOnly: true
+      properties:
+        invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Invoice'
+    LeadSourceEmbed:
+      type: object
+      description: Lead Source object
+      readOnly: true
+      properties:
+        leadSource:
+          $ref: '#/components/schemas/LeadSource'
+    OrganizationEmbed:
+      type: object
+      description: Organization object
+      readOnly: true
+      properties:
+        organization:
+          $ref: 'https://rebilly.github.io/RebillyUserAPI/openapi.json#/components/schemas/Organization'
+    ParentTransactionEmbed:
+      type: object
+      description: Retried Transaction object
+      readOnly: true
+      properties:
+        parentTransaction:
+          $ref: '#/components/schemas/Transaction'
+    PaymentCardEmbed:
+      type: object
+      description: Payment Card object
+      readOnly: true
+      properties:
+        paymentCard:
+          $ref: '#/components/schemas/PaymentCard'
+    PlanEmbed:
+      type: object
+      description: Plan object
+      readOnly: true
+      properties:
+        plan:
+          $ref: '#/components/schemas/Plan'
+    ProductEmbed:
+      type: object
+      description: Product object
+      readOnly: true
+      properties:
+        product:
+          $ref: '#/components/schemas/Product'
     RecentInvoiceEmbed:
       type: object
       description: Recent Invoice object
@@ -8751,6 +8870,27 @@ components:
       properties:
         recentInvoice:
           $ref: '#/components/schemas/Invoice'
+    RetriedTransactionEmbed:
+      type: object
+      description: Parent Transaction object
+      readOnly: true
+      properties:
+        retriedTransaction:
+          $ref: '#/components/schemas/Transaction'
+    SubscriptionEmbed:
+      type: object
+      description: Subscription object
+      readOnly: true
+      properties:
+        subscription:
+          $ref: '#/components/schemas/Subscription'
+    TransactionEmbed:
+      type: object
+      description: Transaction object
+      readOnly: true
+      properties:
+        transaction:
+          $ref: '#/components/schemas/Transaction'
     WebsiteEmbed:
       type: object
       description: Website object
@@ -9152,6 +9292,17 @@ components:
               - $ref: '#/components/schemas/WebsiteLink'
               - $ref: '#/components/schemas/OrganizationLink'
               - $ref: '#/components/schemas/LeadSourceLink'
+        _embedded:
+          type: array
+          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          readOnly: true
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/CustomerEmbed'
+              - $ref: '#/components/schemas/WebsiteEmbed'
+              - $ref: '#/components/schemas/OrganizationEmbed'
+              - $ref: '#/components/schemas/LeadSourceEmbed'
     InvoiceIssue:
       type: object
       properties:
@@ -9232,6 +9383,15 @@ components:
               - $ref: '#/components/schemas/SelfLink'
               - $ref: '#/components/schemas/SubscriptionLink'
               - $ref: '#/components/schemas/ProductLink'
+        _embedded:
+          type: array
+          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          readOnly: true
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/ProductEmbed'
+              - $ref: '#/components/schemas/PlanEmbed'
     InvoiceTax:
       type: object
       readOnly: true
@@ -9949,6 +10109,16 @@ components:
               - $ref: '#/components/schemas/TransactionLink'
               - $ref: '#/components/schemas/ApprovalUrlLink'
               - $ref: '#/components/schemas/LeadSourceLink'
+        _embedded:
+          type: array
+          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          readOnly: true
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/WebsiteEmbed'
+              - $ref: '#/components/schemas/CustomerEmbed'
+              - $ref: '#/components/schemas/TransactionEmbed'
     PaymentCard:
       type: object
       required:
@@ -9994,7 +10164,7 @@ components:
           readOnly: true
         status:
           description: |
-            Payment Card status.  When a card is `active` it means it has been used at least once for an approved transaction.  
+            Payment Card status.  When a card is `active` it means it has been used at least once for an approved transaction.
             To remove a card from being in use, set it as `deactivated` (see the deactivation endpoint).
           type: string
           readOnly: true
@@ -10042,6 +10212,15 @@ components:
               - $ref: '#/components/schemas/CustomerLink'
               - $ref: '#/components/schemas/AuthTransactionLink'
               - $ref: '#/components/schemas/ApprovalUrlLink'
+        _embedded:
+          type: array
+          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          readOnly: true
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/AuthTransactionEmbed'
+              - $ref: '#/components/schemas/CustomerEmbed'
     PaymentCardCreatePlain:
       type: object
       required:
@@ -11421,7 +11600,7 @@ components:
           type: string
           description: |
             The status of the subscription service. A subscription starts
-            in the `pending` status, and will become `active` when the 
+            in the `pending` status, and will become `active` when the
             service period begins.
           readOnly: true
           enum:
@@ -11566,6 +11745,7 @@ components:
               - $ref: '#/components/schemas/InitialInvoiceEmbed'
               - $ref: '#/components/schemas/CustomerEmbed'
               - $ref: '#/components/schemas/WebsiteEmbed'
+              - $ref: '#/components/schemas/LeadSourceEmbed'
     one-time-order:
       allOf:
         - $ref: '#/components/schemas/Subscription'
@@ -12956,6 +13136,19 @@ components:
               - $ref: '#/components/schemas/RefundUrlLink'
               - $ref: '#/components/schemas/DisputeLink'
               - $ref: '#/components/schemas/InvoicesLink'
+        _embedded:
+          type: array
+          description: Any embedded objects available that are requested by the `expand` querystring parameter.
+          readOnly: true
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/ParentTransactionEmbed'
+              - $ref: '#/components/schemas/RetriedTransactionEmbed'
+              - $ref: '#/components/schemas/GatewayAccountEmbed'
+              - $ref: '#/components/schemas/CustomerEmbed'
+              - $ref: '#/components/schemas/LeadSourceEmbed'
+              - $ref: '#/components/schemas/InvoicesEmbed'
     TransactionRequest:
       type: object
       required:

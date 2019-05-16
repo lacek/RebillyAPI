@@ -9954,6 +9954,19 @@
                 }
               ]
             }
+          },
+          "_embedded": {
+            "type": "array",
+            "description": "Any embedded objects available that are requested by the `expand` querystring parameter.",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/FileEmbed"
+                }
+              ]
+            }
           }
         }
       },
@@ -10075,6 +10088,19 @@
                 },
                 {
                   "$ref": "#/components/schemas/CustomerLink"
+                }
+              ]
+            }
+          },
+          "_embedded": {
+            "type": "array",
+            "description": "Any embedded objects available that are requested by the `expand` querystring parameter.",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/CustomerEmbed"
                 }
               ]
             }
@@ -10350,6 +10376,19 @@
                 },
                 {
                   "$ref": "#/components/schemas/CustomerLink"
+                }
+              ]
+            }
+          },
+          "_embedded": {
+            "type": "array",
+            "description": "Any embedded objects available that are requested by the `expand` querystring parameter.",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/CustomerEmbed"
                 }
               ]
             }
@@ -11144,6 +11183,19 @@
                 }
               ]
             }
+          },
+          "_embedded": {
+            "type": "array",
+            "description": "Any embedded objects available that are requested by the `expand` querystring parameter.",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/LeadSourceEmbed"
+                }
+              ]
+            }
           }
         }
       },
@@ -11727,6 +11779,39 @@
                 }
               ]
             }
+          },
+          "_embedded": {
+            "type": "array",
+            "description": "Any embedded objects available that are requested by the `expand` querystring parameter.",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/TransactionEmbed"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "AuthTransactionEmbed": {
+        "type": "object",
+        "description": "Auth Transaction object",
+        "readOnly": true,
+        "properties": {
+          "authTransaction": {
+            "$ref": "#/components/schemas/Transaction"
+          }
+        }
+      },
+      "BankAccountEmbed": {
+        "type": "object",
+        "description": "Bank Account object",
+        "readOnly": true,
+        "properties": {
+          "bankAccount": {
+            "$ref": "#/components/schemas/BankAccount"
           }
         }
       },
@@ -11740,6 +11825,26 @@
           }
         }
       },
+      "FileEmbed": {
+        "type": "object",
+        "description": "File object",
+        "readOnly": true,
+        "properties": {
+          "file": {
+            "$ref": "#/components/schemas/File"
+          }
+        }
+      },
+      "GatewayAccountEmbed": {
+        "type": "object",
+        "description": "Gateway Account object",
+        "readOnly": true,
+        "properties": {
+          "gatewayAccount": {
+            "$ref": "https://rebilly.github.io/RebillyUserAPI/openapi.json#/components/schemas/GatewayAccount"
+          }
+        }
+      },
       "InitialInvoiceEmbed": {
         "type": "object",
         "description": "Initial Invoice object",
@@ -11750,6 +11855,79 @@
           }
         }
       },
+      "InvoicesEmbed": {
+        "type": "object",
+        "description": "Invoices collection",
+        "readOnly": true,
+        "properties": {
+          "invoices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Invoice"
+            }
+          }
+        }
+      },
+      "LeadSourceEmbed": {
+        "type": "object",
+        "description": "Lead Source object",
+        "readOnly": true,
+        "properties": {
+          "leadSource": {
+            "$ref": "#/components/schemas/LeadSource"
+          }
+        }
+      },
+      "OrganizationEmbed": {
+        "type": "object",
+        "description": "Organization object",
+        "readOnly": true,
+        "properties": {
+          "organization": {
+            "$ref": "https://rebilly.github.io/RebillyUserAPI/openapi.json#/components/schemas/Organization"
+          }
+        }
+      },
+      "ParentTransactionEmbed": {
+        "type": "object",
+        "description": "Retried Transaction object",
+        "readOnly": true,
+        "properties": {
+          "parentTransaction": {
+            "$ref": "#/components/schemas/Transaction"
+          }
+        }
+      },
+      "PaymentCardEmbed": {
+        "type": "object",
+        "description": "Payment Card object",
+        "readOnly": true,
+        "properties": {
+          "paymentCard": {
+            "$ref": "#/components/schemas/PaymentCard"
+          }
+        }
+      },
+      "PlanEmbed": {
+        "type": "object",
+        "description": "Plan object",
+        "readOnly": true,
+        "properties": {
+          "plan": {
+            "$ref": "#/components/schemas/Plan"
+          }
+        }
+      },
+      "ProductEmbed": {
+        "type": "object",
+        "description": "Product object",
+        "readOnly": true,
+        "properties": {
+          "product": {
+            "$ref": "#/components/schemas/Product"
+          }
+        }
+      },
       "RecentInvoiceEmbed": {
         "type": "object",
         "description": "Recent Invoice object",
@@ -11757,6 +11935,36 @@
         "properties": {
           "recentInvoice": {
             "$ref": "#/components/schemas/Invoice"
+          }
+        }
+      },
+      "RetriedTransactionEmbed": {
+        "type": "object",
+        "description": "Parent Transaction object",
+        "readOnly": true,
+        "properties": {
+          "retriedTransaction": {
+            "$ref": "#/components/schemas/Transaction"
+          }
+        }
+      },
+      "SubscriptionEmbed": {
+        "type": "object",
+        "description": "Subscription object",
+        "readOnly": true,
+        "properties": {
+          "subscription": {
+            "$ref": "#/components/schemas/Subscription"
+          }
+        }
+      },
+      "TransactionEmbed": {
+        "type": "object",
+        "description": "Transaction object",
+        "readOnly": true,
+        "properties": {
+          "transaction": {
+            "$ref": "#/components/schemas/Transaction"
           }
         }
       },
@@ -12360,6 +12568,28 @@
                 }
               ]
             }
+          },
+          "_embedded": {
+            "type": "array",
+            "description": "Any embedded objects available that are requested by the `expand` querystring parameter.",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/CustomerEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/WebsiteEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/OrganizationEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/LeadSourceEmbed"
+                }
+              ]
+            }
           }
         }
       },
@@ -12482,6 +12712,22 @@
                 },
                 {
                   "$ref": "#/components/schemas/ProductLink"
+                }
+              ]
+            }
+          },
+          "_embedded": {
+            "type": "array",
+            "description": "Any embedded objects available that are requested by the `expand` querystring parameter.",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ProductEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/PlanEmbed"
                 }
               ]
             }
@@ -13604,6 +13850,25 @@
                 }
               ]
             }
+          },
+          "_embedded": {
+            "type": "array",
+            "description": "Any embedded objects available that are requested by the `expand` querystring parameter.",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/WebsiteEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/CustomerEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/TransactionEmbed"
+                }
+              ]
+            }
           }
         }
       },
@@ -13671,7 +13936,7 @@
             "readOnly": true
           },
           "status": {
-            "description": "Payment Card status.  When a card is `active` it means it has been used at least once for an approved transaction.  \nTo remove a card from being in use, set it as `deactivated` (see the deactivation endpoint).\n",
+            "description": "Payment Card status.  When a card is `active` it means it has been used at least once for an approved transaction.\nTo remove a card from being in use, set it as `deactivated` (see the deactivation endpoint).\n",
             "type": "string",
             "readOnly": true,
             "enum": [
@@ -13743,6 +14008,22 @@
                 },
                 {
                   "$ref": "#/components/schemas/ApprovalUrlLink"
+                }
+              ]
+            }
+          },
+          "_embedded": {
+            "type": "array",
+            "description": "Any embedded objects available that are requested by the `expand` querystring parameter.",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/AuthTransactionEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/CustomerEmbed"
                 }
               ]
             }
@@ -15743,7 +16024,7 @@
           },
           "status": {
             "type": "string",
-            "description": "The status of the subscription service. A subscription starts\nin the `pending` status, and will become `active` when the \nservice period begins.\n",
+            "description": "The status of the subscription service. A subscription starts\nin the `pending` status, and will become `active` when the\nservice period begins.\n",
             "readOnly": true,
             "enum": [
               "pending",
@@ -15955,6 +16236,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/WebsiteEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/LeadSourceEmbed"
                 }
               ]
             }
@@ -17946,6 +18230,34 @@
                 },
                 {
                   "$ref": "#/components/schemas/InvoicesLink"
+                }
+              ]
+            }
+          },
+          "_embedded": {
+            "type": "array",
+            "description": "Any embedded objects available that are requested by the `expand` querystring parameter.",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ParentTransactionEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/RetriedTransactionEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/GatewayAccountEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/CustomerEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/LeadSourceEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/InvoicesEmbed"
                 }
               ]
             }
