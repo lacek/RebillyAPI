@@ -12724,9 +12724,6 @@
             "items": {
               "anyOf": [
                 {
-                  "$ref": "#/components/schemas/SubscriptionEmbed"
-                },
-                {
                   "$ref": "#/components/schemas/ProductEmbed"
                 },
                 {

@@ -9390,7 +9390,6 @@ components:
           minItems: 1
           items:
             anyOf:
-              - $ref: '#/components/schemas/SubscriptionEmbed'
               - $ref: '#/components/schemas/ProductEmbed'
               - $ref: '#/components/schemas/PlanEmbed'
     InvoiceTax:
