@@ -11969,12 +11969,18 @@ components:
     OrderChange:
       type: object
       properties:
+        id:
+          description: Change ID
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
         orderId:
           description: Change Order ID.
           type: string
         status:
           description: Change status
           type: string
+          readOnly: true
           enum:
             - pending
             - applied
@@ -11982,13 +11988,75 @@ components:
           description: An auto-incrementing number based on the sequence of changes for any particular order.
           type: string
           example: '000001'
+          readOnly: true
         changes:
           description: Order changes
           type: array
           items:
             $ref: '#/components/schemas/OrderChangeItem'
+        changedBy:
+          description: The author of Order Change.
+          type: string
+          readOnly: true
+        difference:
+          type: object
+          readOnly: true
+          properties:
+            removed:
+              type: object
+              properties:
+                items:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/InvoiceItem'
+                issuedTime:
+                  description: 'Null, if issuedTime wasn''t changed.'
+                  nullable: true
+                  allOf:
+                    - $ref: '#/components/schemas/ServerTimestamp'
+                dueTime:
+                  description: 'Null, if dueTime wasn''t changed.'
+                  nullable: true
+                  allOf:
+                    - $ref: '#/components/schemas/ServerTimestamp'
+            added:
+              type: object
+              properties:
+                items:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/InvoiceItem'
+                issuedTime:
+                  description: 'Null, if issuedTime wasn''t changed.'
+                  nullable: true
+                  allOf:
+                    - $ref: '#/components/schemas/ServerTimestamp'
+                dueTime:
+                  description: 'Null, if dueTime wasn''t changed.'
+                  nullable: true
+                  allOf:
+                    - $ref: '#/components/schemas/ServerTimestamp'
+            deferred:
+              description: Deferred Invoice preview
+              readOnly: true
+              allOf:
+                - $ref: '#/components/schemas/Invoice'
+            interim:
+              description: Interim Invoice preview
+              readOnly: true
+              allOf:
+                - $ref: '#/components/schemas/Invoice'
+            upcoming:
+              description: Upcoming Invoice preview
+              readOnly: true
+              allOf:
+                - $ref: '#/components/schemas/Invoice'
         createdTime:
           description: The change created time
+          allOf:
+            - $ref: '#/components/schemas/ServerTimestamp'
+        updatedTime:
+          description: The change updated time
           allOf:
             - $ref: '#/components/schemas/ServerTimestamp'
         appliedTime:
@@ -12001,12 +12069,14 @@ components:
         - $ref: '#/components/schemas/OrderChangeItem'
         - type: object
           required:
-            - effectiveTime
+            - billingAnchor
           properties:
-            effectiveTime:
-              description: Changed billing anchor
-              type: string
-              format: date-time
+            billingAnchor:
+              description: Changed Billing Anchor
+              nullable: true
+              example: null
+              allOf:
+                - $ref: '#/components/schemas/PlanBillingAnchor'
     OrderChangeItemRemove:
       description: Remove Item from Order.
       allOf:
@@ -12056,6 +12126,10 @@ components:
           renewal-time: '#/components/schemas/OrderChangeRenewalTime'
           billing-anchor: '#/components/schemas/OrderChangeBillingAnchor'
       properties:
+        id:
+          description: Change Order Item ID.
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
         changeType:
           description: Change Type.
           type: string
@@ -12065,9 +12139,10 @@ components:
             - renewal-time
             - billing-anchor
         effectiveTime:
-          description: Change effective time.
+          description: Change effective time. Set to null for next renewal time.
           type: string
           format: date-time
+          nullable: true
         proration:
           description: Defines if this change will be prorated.
           type: boolean
