@@ -152,6 +152,9 @@ tags:
       A User represents a person who can login to Rebilly, and take actions subject to
       their granted permissions.  It has resources less commonly integrated by
       3rd parties.
+  - name: Change Order
+    description: |
+      TODO
 ################################################################################
 x-tagGroups:
   - name: Customers
@@ -186,6 +189,7 @@ x-tagGroups:
       - Shipping Zones
       - Subscriptions
       - Taxes
+      - Change Order
   - name: Misc
     tags:
       - Reports
