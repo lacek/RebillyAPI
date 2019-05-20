@@ -5,9 +5,11 @@ allOf:
   -
     type: "object"
     required:
-      - effectiveTime
+      - billingAnchor
     properties:
-      effectiveTime:
-        description: Changed billing anchor
-        type: string
-        format: date-time
+      billingAnchor:
+        description: Changed Billing Anchor
+        nullable: true
+        example: null
+        allOf:
+          - $ref: "#/components/schemas/PlanBillingAnchor"

@@ -8,6 +8,10 @@ discriminator:
     "billing-anchor": "#/components/schemas/OrderChangeBillingAnchor"
     #"pricing": "#/components/schemas/OrderChangePricing"
 properties:
+  id:
+    description: Change Order Item ID.
+    allOf:
+      - $ref: "#/components/schemas/ResourceId"
   changeType:
     description: Change Type.
     type: string
@@ -18,9 +22,10 @@ properties:
       - "billing-anchor"
       #- "pricing"
   effectiveTime:
-    description: Change effective time.
+    description: Change effective time. Set to null for next renewal time.
     type: string
     format: date-time
+    nullable: true
   proration:
     description: Defines if this change will be prorated.
     type: boolean
