@@ -1,0 +1,13 @@
+description: Remove Item from Order.
+allOf:
+  -
+    $ref: "#/components/schemas/OrderChangeItem"
+  -
+    type: "object"
+    required:
+      - itemId
+    properties:
+      itemId:
+        description: Order Item identifier string
+        allOf:
+          - $ref: "#/components/schemas/ResourceId"

@@ -1,0 +1,13 @@
+description: Change Order Renewal Time.
+allOf:
+  -
+    $ref: "#/components/schemas/OrderChangeItem"
+  -
+    type: "object"
+    required:
+      - renewalTime
+    properties:
+      renewalTime:
+        description: Changed renewal time
+        type: string
+        format: date-time

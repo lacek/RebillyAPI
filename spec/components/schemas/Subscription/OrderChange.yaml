@@ -1,0 +1,28 @@
+type: object
+properties:
+  orderId:
+    description: Change Order ID.
+    type: string
+  status:
+    description: Change status
+    type: string
+    enum:
+      - "pending"
+      - "applied"
+  changeNumber:
+    description: An auto-incrementing number based on the sequence of changes for any particular order.
+    type: string
+    example: "000001"
+  changes:
+    description: Order changes
+    type: array
+    items:
+      $ref: "#/components/schemas/OrderChangeItem"
+  createdTime:
+    description: The change created time
+    allOf:
+      - $ref: "#/components/schemas/ServerTimestamp"
+  appliedTime:
+    description: The change applied time
+    allOf:
+      - $ref: "#/components/schemas/ServerTimestamp"

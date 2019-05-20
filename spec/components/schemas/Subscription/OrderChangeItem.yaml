@@ -1,0 +1,30 @@
+type: object
+discriminator:
+  propertyName: changeType
+  mapping:
+    "item-remove": "#/components/schemas/OrderChangeItemRemove"
+    "plan-add": "#/components/schemas/OrderChangePlanAdd"
+    "renewal-time": "#/components/schemas/OrderChangeRenewalTime"
+    "billing-anchor": "#/components/schemas/OrderChangeBillingAnchor"
+    #"pricing": "#/components/schemas/OrderChangePricing"
+properties:
+  changeType:
+    description: Change Type.
+    type: string
+    enum:
+      - "item-remove"
+      - "plan-add"
+      - "renewal-time"
+      - "billing-anchor"
+      #- "pricing"
+  effectiveTime:
+    description: Change effective time.
+    type: string
+    format: date-time
+  proration:
+    description: Defines if this change will be prorated.
+    type: boolean
+  createdTime:
+    description: The change created time
+    allOf:
+      - $ref: "#/components/schemas/ServerTimestamp"

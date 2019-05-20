@@ -1,0 +1,13 @@
+description: Change Order Billing Anchor.
+allOf:
+  -
+    $ref: "#/components/schemas/OrderChangeItem"
+  -
+    type: "object"
+    required:
+      - effectiveTime
+    properties:
+      effectiveTime:
+        description: Changed billing anchor
+        type: string
+        format: date-time

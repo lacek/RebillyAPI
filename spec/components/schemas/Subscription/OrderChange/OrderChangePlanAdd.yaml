@@ -1,0 +1,16 @@
+description: Add Plan to Order.
+allOf:
+  -
+    $ref: "#/components/schemas/OrderChangeItem"
+  -
+    type: "object"
+    required:
+      - planId
+    properties:
+      planId:
+        description: Plan identifier string
+        allOf:
+          - $ref: "#/components/schemas/ResourceId"
+      quantity:
+        description: Number of units of the product on the given plan
+        type: integer
