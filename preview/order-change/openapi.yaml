@@ -4206,18 +4206,18 @@ paths:
           $ref: '#/components/responses/Conflict'
         '422':
           $ref: '#/components/responses/InvalidDataError'
-  '/order-changes/{id}/interim':
+  '/order-changes/{id}/deferred/apply':
     parameters:
       - $ref: '#/components/parameters/resourceId'
-    get:
+    post:
       tags:
         - Change Order
-      summary: Preview Order Change interim Invoice
+      summary: Apply and issue Deferred Invoice.
       description: |
-        Preview Order Change interim Invoice
+        Apply and issue Deferred Invoice.
       responses:
-        '200':
-          description: Order Change interim Invoice preview was retrieved successfully
+        '201':
+          description: Deferred Invoice was applied and issued.
           headers:
             Rate-Limit-Limit:
               $ref: '#/components/headers/Rate-Limit-Limit'
@@ -4228,20 +4228,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Invoice'
+                $ref: '#/components/schemas/OrderChange'
         '401':
           $ref: '#/components/responses/AccessForbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/InvalidDataError'
+  '/order-changes/{id}/interim/apply':
+    parameters:
+      - $ref: '#/components/parameters/resourceId'
     post:
       tags:
         - Change Order
-      summary: Cancel a pending Order Change
+      summary: Apply and issue Interim Invoice.
       description: |
-        Cancel a pending Order Change. Only pending Order Change can be canceled.
+        Apply and issue Interim Invoice.
       responses:
         '201':
-          description: Order Change was canceled
+          description: Interim Invoice was applied and issued.
           headers:
             Rate-Limit-Limit:
               $ref: '#/components/headers/Rate-Limit-Limit'
