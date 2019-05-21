@@ -945,9 +945,6 @@ paths:
                     - checking
                     - savings
                     - other
-                bic:
-                  description: Bank Identifier Code
-                  type: string
                 address:
                   description: The Address.
                   allOf:
