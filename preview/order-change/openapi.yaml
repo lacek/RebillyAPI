@@ -4113,7 +4113,7 @@ paths:
         - Change Order
       summary: Retrieve an Order Change
       description: |
-        Retrieve a an Order Change with specified identifier string
+        Retrieve an Order Change with specified identifier string
       responses:
         '200':
           description: Order Change was retrieved successfully
@@ -11992,8 +11992,7 @@ components:
             - canceled
         changeNumber:
           description: An auto-incrementing number based on the sequence of changes for any particular order.
-          type: string
-          example: '000001'
+          type: integer
           readOnly: true
         changes:
           description: Order changes
