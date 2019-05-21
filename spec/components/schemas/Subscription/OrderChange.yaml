@@ -15,6 +15,7 @@ properties:
     enum:
       - "pending"
       - "applied"
+      - "canceled"
   changeNumber:
     description: An auto-incrementing number based on the sequence of changes for any particular order.
     type: string
