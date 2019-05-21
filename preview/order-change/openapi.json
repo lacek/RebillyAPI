@@ -16616,7 +16616,8 @@
             "readOnly": true,
             "enum": [
               "pending",
-              "applied"
+              "applied",
+              "canceled"
             ]
           },
           "changeNumber": {
