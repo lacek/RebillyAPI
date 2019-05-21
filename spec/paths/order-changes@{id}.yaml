@@ -5,7 +5,7 @@ get:
     - Change Order
   summary: Retrieve an Order Change
   description: |
-    Retrieve a an Order Change with specified identifier string
+    Retrieve an Order Change with specified identifier string
   responses:
     200:
       description: Order Change was retrieved successfully
