@@ -1265,7 +1265,7 @@
         },
         "responses": {
           "200": {
-            "description": "Payment card was updated",
+            "description": "BankAccount was updated",
             "headers": {
               "Rate-Limit-Limit": {
                 "$ref": "#/components/headers/Rate-Limit-Limit"
@@ -1280,7 +1280,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaymentCard"
+                  "$ref": "#/components/schemas/BankAccount"
                 }
               }
             }
