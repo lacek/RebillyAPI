@@ -18,8 +18,7 @@ properties:
       - "canceled"
   changeNumber:
     description: An auto-incrementing number based on the sequence of changes for any particular order.
-    type: string
-    example: "000001"
+    type: integer
     readOnly: true
   changes:
     description: Order changes
